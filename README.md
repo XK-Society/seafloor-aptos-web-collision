@@ -7,24 +7,24 @@ Seafloor Finance is a decentralized finance (DeFi) platform focused on enabling 
 - **Token Management**: Create, view, and manage DeFi tokens.
 - **User Dashboard**: Displays token balances, transaction history, etc.
 - **Staking & Liquidity**: Stake tokens and provide liquidity.
-- **Wallet Integration**: MetaMask, WalletConnect, and more.
+- **Wallet Integration**: Petra Wallet.
 - **Responsive Design**: Optimized for all devices.
 
 **Technologies Used**
-React.js: UI development.
-Vite: Build tool.
-React Router: Navigation.
+- **React.js: UI development.**
+- **Vite: Build tool.**
+- **React Router: Navigation.**
 
 **Getting Started**
-Prerequisites
-Node.js (>=14.x)
-Yarn or npm
+- **Prerequisites**
+- **Node.js (>=14.x)**
+- **Yarn or npm**
 
 **Installation**
 1. Clone the repository:
 ```bash
-git clone https://github.com/XK-Society/seafloor-aptos-web.git
-cd seafloor-aptos-web
+git clone https://github.com/XK-Society/seafloor-aptos-web-collision.git
+cd seafloor-aptos-web-collision
 ```
 
 3. Install dependencies:
