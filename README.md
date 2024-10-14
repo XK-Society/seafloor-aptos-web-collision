@@ -4,11 +4,11 @@
 Seafloor Finance is a decentralized finance (DeFi) platform focused on enabling users to engage in various financial activities on the Aptos blockchain. This repository contains the frontend code, built using React and Vite.
 
 **Features**
-Token Management: Create, view, and manage DeFi tokens.
-User Dashboard: Displays token balances, transaction history, etc.
-Staking & Liquidity: Stake tokens and provide liquidity.
-Wallet Integration: MetaMask, WalletConnect, and more.
-Responsive Design: Optimized for all devices.
+- **Token Management**: Create, view, and manage DeFi tokens.
+- **User Dashboard**: Displays token balances, transaction history, etc.
+- **Staking & Liquidity**: Stake tokens and provide liquidity.
+- **Wallet Integration**: MetaMask, WalletConnect, and more.
+- **Responsive Design**: Optimized for all devices.
 
 **Technologies Used**
 React.js: UI development.
