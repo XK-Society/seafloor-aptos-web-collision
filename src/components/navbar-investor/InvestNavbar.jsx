@@ -88,8 +88,8 @@ const InvestNavbar = () => {
           ) : (
             <div className="wallet-info-investor">
               <p>{`${formatAddress(account)} (${walletType})`}</p>
-              <button onClick={disconnectWallet}>Disconnect</button>
-              <button onClick={switchWallet}>Switch Wallet</button>
+              <button className="button-wallet" onClick={disconnectWallet}>Disconnect</button>
+              <button className="button-wallet" onClick={switchWallet}>Switch Wallet</button>
             </div>
           )}
         </div>
