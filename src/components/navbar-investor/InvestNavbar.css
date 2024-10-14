@@ -1,0 +1,84 @@
+.navbar-investor {
+  background-color: white; 
+  border-bottom-left-radius: 20px; 
+  border-bottom-right-radius: 20px; 
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+  padding: 0px 20px 0px 20px;
+  /* position: fixed; */
+  width: 100%;
+  box-sizing: border-box;
+  top: 0;
+}
+
+.navbar-container-investor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-investor {
+  display: flex;
+  align-items: center;
+}
+
+.logo-image-investor {
+  height: 50px;
+}
+
+.wallet-investor {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.wallet-button-investor {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: #032B5F;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.wallet-icon-investor {
+  height: 20px;
+  width: 20px;
+  margin-right: 0.5rem;
+}
+
+.wallet-button-investor:hover {
+  color: #a0aec0;
+}
+
+.wallet-investor p {
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  text-align: left;
+}
+
+.wallet-investor p:hover {
+  color: #a0aec0;
+}
+
+/* @media (max-width: 600px) {
+  .navbar-investor {
+      padding: 0.5rem; 
+  }
+
+  .wallet-investor p {
+      margin-right: 1rem; 
+  }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+  .navbar-investor {
+      padding: 0.75rem; 
+  }
+}
+
+@media (min-width: 769px) {
+  .navbar-investor {
+      padding: 1rem; 
+  }
+} */

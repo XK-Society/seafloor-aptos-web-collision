@@ -1,0 +1,45 @@
+.profile-page {
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .profile-page h1 {
+    font-size: 20px;
+    color: #fff;
+  }
+  
+  .profile-info {
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: flex-start; */
+    gap: 20px;
+    width: 100%;
+    max-width: 350px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .profile-label {
+    font-weight: bold;
+    color: #032B5F;
+  }
+  
+  .profile-value {
+    font-size: 15px;
+    color: #032B5F;
+    word-break: break-all;
+  }
+  

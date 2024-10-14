@@ -1,0 +1,136 @@
+
+.dash-container {
+    background-color: #032B5F; 
+    padding: 20px;
+    max-width: 350px; 
+    margin: 0 auto;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: flex-start; 
+    padding: 5px 20px 50px 30px;
+}
+
+/* Header styling */
+.header {
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Token list styles */
+.token-list {
+    display: flex;
+    flex-direction: column; 
+    width: 100%;
+    align-items: center;
+}
+
+/* Token card styling */
+.token-card {
+    width: 90%; 
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 15px; 
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease; 
+    flex-direction:column;
+}
+
+.token-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); 
+}
+
+.token-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    margin-right: 20px;
+}
+
+.token-info {
+    flex: 1;
+}
+
+.token-name {
+    font-size: 18px; /* Base font size */
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    color: #032B5F; 
+}
+
+.token-description {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px; 
+    color: grey;
+}
+
+.token-invest {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px; 
+    font-weight: bold;
+    color: #333;
+}
+
+.gif-container-dash {
+    display: flex;
+    justify-content: center; 
+    margin: 20px 0; 
+}
+
+.gif-container-dash img {
+    max-width: 100%;
+    height: auto; 
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 600px) {
+    .header {
+        font-size: 24px; /* Smaller header size for small screens */
+    }
+
+    .token-card {
+        width: 95%; /* Wider card for small screens */
+        padding: 15px; /* Reduced padding */
+    }
+
+    .token-name {
+        font-size: 16px; /* Smaller font size for name */
+    }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+    .header {
+        font-size: 26px; /* Increase header size */
+    }
+
+    .token-card {
+        width: 80%; /* Wider card for medium screens */
+        padding: 18px; /* Moderate padding */
+    }
+
+    .token-name {
+        font-size: 18px; /* Base font size */
+    }
+}
+
+@media (min-width: 769px) {
+    .header {
+        font-size: 28px; /* Increase header size for large screens */
+    }
+
+    .token-card {
+        width: 70%; /* Wider card for large screens */
+        padding: 20px; /* Default padding */
+    }
+
+    .token-name {
+        font-size: 20px; /* Larger font size for name */
+    }
+}

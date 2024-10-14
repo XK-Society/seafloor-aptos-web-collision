@@ -1,0 +1,40 @@
+.collabpage {
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    padding: 3rem;
+  }
+  
+  .collab-header {
+    margin-bottom: 2rem;
+  }
+  
+  .collab-text {
+    font-size: 2rem;
+    color: #2d3748;
+    margin-top: 1rem;
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+  
+  .grid-item {
+    background-color: #edf2f7;
+    padding: 2rem;
+    border-radius: 8px;
+  }
+  
+  .grid-item h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .grid-button {
+    background-color: #2d3748;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+  }
+  

@@ -1,0 +1,49 @@
+.choose {
+    text-align: center;
+    padding: 8rem;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .choose-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #2d3748;
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+  
+  .grid-item {
+    background-color: #edf2f7;
+    padding: 1.5rem;
+    border-radius: 8px;
+    position: relative; /* Ensure arrow button is positioned correctly */
+  }
+  
+  .grid-item h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .grid-item p {
+    font-size: 1rem;
+    color: #2d3748;
+  }
+  
+  .arrow-button {
+    background-color: #2d3748;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 20%;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  

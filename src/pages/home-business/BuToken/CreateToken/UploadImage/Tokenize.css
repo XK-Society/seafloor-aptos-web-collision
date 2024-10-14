@@ -1,0 +1,102 @@
+.token {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+  
+  .token h1 {
+    font-family: "Poppins", sans-serif;
+    color: #fff;
+    font-size: 18px;
+    padding-top: 10px;
+  }
+  
+  .token-desc-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 20px 30px 20px 10px;
+    max-width: 250px;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .desc-group {
+    margin-bottom: 15px;
+  }
+  
+  .desc-group label {
+    font-family: "Poppins", sans-serif;
+    display: block;
+    font-size: 15px;
+    color: #032B5F;
+  }
+  
+  .desc-group input,
+  .desc-group textarea {
+    font-family: "Poppins", sans-serif;
+    font-weight: normal;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+  
+  .desc-group textarea {
+    resize: none;
+    height: 50px;
+  }
+  
+  .submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #032B5F;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .submit-button:hover {
+    background-color: #fff;
+    color: #032B5F;
+  }
+  
+  .token-summary h2 {
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    color: #032B5F;
+    font-size: 18px;
+  }
+  
+  .token-summary p {
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    color: #032B5F;
+    margin-bottom: 10px;
+  }
+  
+  .new-token-button {
+    font-family: "Poppins", sans-serif;
+    width: 100%;
+    padding: 10px;
+    background-color: #032B5F;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .new-token-button:hover {
+    background-color: #fff;
+    color: #032B5F;
+  }
+  

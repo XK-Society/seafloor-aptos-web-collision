@@ -1,0 +1,43 @@
+.footer-investor {
+    background-color: #fff; 
+    border-radius: 20px; 
+    width: 100%; 
+    position: fixed; 
+    bottom: 0; 
+    /* left: 50%;  */
+    /*transform: translateX(-50%);   */
+    margin: auto; 
+    padding: 10px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    /* z-index: 1000; */
+    box-sizing: border-box;
+  }
+  
+  .footer-container-investor {
+    display: flex; 
+    /* width: 100%;  */
+    /* max-width: 1500px; 
+    min-width: 320px; */
+    justify-content: space-around; 
+    align-items: center;
+    /* flex-wrap: wrap;  */
+    /* margin: 0 auto; */
+    box-sizing: border-box;  
+  }
+  
+  .footer-item-investor {
+  /* text-align: center; */
+  color: grey; 
+  text-decoration: none;
+  transition: color 0.3s;
+  }
+  
+  .footer-icon-invest {
+    font-size: 25px;
+    color: grey;
+  }
+  
+  .footer-item-investor.active .footer-icon-invest {
+    color: #032B5F;
+  }
+  

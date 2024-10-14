@@ -1,0 +1,86 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.profile-page-investor {
+    background-color: #032B5F; 
+    padding: 20px;
+    max-width: 500px; 
+    margin: 0 auto;
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    justify-content: flex-start; 
+    /* min-height: 100vh;  */
+    padding: 10px 20px 20px 30px;
+}
+
+.profile-container-investor {
+    width: 90%; 
+    max-width: 1500px; 
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 15px; 
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease; 
+}
+
+.header {
+    font-size: 20px; 
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-info-investor {
+    width: 100%; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+}
+
+.profile-label-investor {
+    font-size: 15px; 
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    color: #032B5F; 
+    margin-bottom: 5px;
+}
+
+.profile-item-investor {
+    margin-bottom: 5px; 
+}
+
+.profile-label-investor {
+    font-weight: bold; 
+}
+
+.profile-value-investor {
+    margin-left: 5px; 
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 600px) {
+    .header-investor {
+        font-size: 24px; 
+    }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+    .header-investor {
+        font-size: 26px; 
+    }
+}
+
+@media (min-width: 769px) {
+    .header-investor {
+        font-size: 28px; 
+    }
+}
