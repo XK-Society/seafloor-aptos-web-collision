@@ -153,19 +153,19 @@ const InTokenList = ({ tokens = defaultTokens }) => {
         <div className="container-home">
             <h2 className="investText">Invest in Interested Business!</h2>
             <h3 className="tokentitle">List Of Tokens</h3>
-            <div className="slider-container">
-                <div className="slider-content">
+            <div className="slid-container">
+                <div className="slid-content">
                     {tokens.map((token, index) => (
                         <div
                             key={token.id}
-                            className={`slider-item ${index === currentIndex ? 'active' : ''}`}
+                            className={`slid-item ${index === currentIndex ? 'active' : ''}`}
                             style={{
                                 transform: `translateX(${(index - currentIndex) * 100}%)`,
                                 opacity: index === currentIndex ? 1 : 0,
                                 transition: 'transform 0.5s ease, opacity 0.5s ease',
                             }}
                         >
-                            <div className="business-info">
+                            <div className="investor-info">
                                 <img src={TokenImage} alt={token.name} className="token-image" />
                                 <h2>{token.name}</h2>
                                 <p>{token.desc}</p>
@@ -179,10 +179,10 @@ const InTokenList = ({ tokens = defaultTokens }) => {
                     ))}
                 </div>
 
-                <button onClick={prevSlide} className="slider-button prev">
+                <button onClick={prevSlide} className="slid-button prev">
                     <ChevronLeft size={24} />
                 </button>
-                <button onClick={nextSlide} className="slider-button next">
+                <button onClick={nextSlide} className="slid-button next">
                     <ChevronRight size={24} />
                 </button>
             </div>

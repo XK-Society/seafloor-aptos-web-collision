@@ -5,7 +5,6 @@ html, body {
 }
 
 .profile-page-investor {
-    background-color: #032B5F; 
     padding: 20px;
     max-width: 500px; 
     margin: 0 auto;
@@ -18,12 +17,11 @@ html, body {
 }
 
 .profile-container-investor {
-    width: 90%; 
+    width: 70%; 
     max-width: 1500px; 
     background-color: #fff;
     border-radius: 20px;
     padding: 20px;
-    margin-bottom: 15px; 
     display: flex;
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -55,15 +53,16 @@ html, body {
 }
 
 .profile-item-investor {
-    margin-bottom: 5px; 
+    display: flex;
 }
 
 .profile-label-investor {
-    font-weight: bold; 
+    font-size: 15px;
 }
 
 .profile-value-investor {
     margin-left: 5px; 
+    font-size: 14px;
 }
 
 /* Media Queries for Responsive Design */
@@ -94,21 +93,22 @@ html, body {
   }
   
   .wallet-address {
-    font-size: 0.9em;
+    font-size: 13px;
     background-color: #f0f0f0;
     padding: 2px 6px;
     border-radius: 4px;
   }
   
-  .copy-button {
+  .profile-copy-button {
+    font-family: 'Poppins', sans-serif;
     margin-left: 10px;
     padding: 2px 8px;
     background-color: #032B5F;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 0.8em;
+    font-size: 13px;
   }
   
   .copy-button:hover {

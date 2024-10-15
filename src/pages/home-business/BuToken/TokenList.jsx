@@ -66,12 +66,12 @@ const TokenList = () => {
               transition: 'transform 0.5s ease, opacity 0.5s ease',
             }}
           >
-            <div className="business-info">
-              <img src={business.image} alt={business.name} className="business-image" />
-              <h2>{business.name}</h2>
-              <p>{business.description}</p>
-              <p className="business-address">Address: {business.address.slice(0, 6)}...{business.address.slice(-4)}</p>
-              <p className="business-stake">Total Stake: {business.stake.toFixed(4)} USDC</p>
+            <div className="butoken-info">
+              <img src={business.image} alt={business.name} className="butoken-info-image" />
+              <h1>{business.name}</h1>
+              <h2>{business.description}</h2>
+              <p>Address: {business.address.slice(0, 6)}...{business.address.slice(-4)}</p>
+              <p>Total Stake: {business.stake.toFixed(4)} USDC</p>
             </div>
           </div>
         ))}

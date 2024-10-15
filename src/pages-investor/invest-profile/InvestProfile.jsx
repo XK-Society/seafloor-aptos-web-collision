@@ -73,7 +73,7 @@ const InvestProfile = () => {
                                     : 'Not connected'}
                             </span>
                             {investorData.walletAddress && (
-                                <button className="copy-button" onClick={() => copyToClipboard(investorData.walletAddress)}>
+                                <button className="profile-copy-button" onClick={() => copyToClipboard(investorData.walletAddress)}>
                                     Copy
                                 </button>
                             )}

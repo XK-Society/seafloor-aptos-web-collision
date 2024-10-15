@@ -16,7 +16,7 @@
 }
 .purchased-noty{
     color: #032B5F;
-    font-size: 18px;
+    font-size: 15px;
     margin-bottom: 1rem; 
     font-weight: bold; 
     text-align: center;
@@ -34,22 +34,22 @@
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 } */
 
-.slider-container {
+.slid-container {
     position: relative;
     /* width: 100%; */
-    /* max-width: 300px; */
-    height: 300px;
+    width: 300px;
+    height: 330px;
     margin: 0 auto;
     overflow: hidden;
   }
 
-.slider-content {
+.slid-content {
     display: flex;
     height: 100%;
     width: 100%; 
   }
 
-.slider-item {
+.slid-item {
     position: absolute;
     width: 100%;
     height: 100%; 
@@ -69,23 +69,23 @@
     object-fit: cover;
   }
   
-  .business-info {
+  .investor-info {
     padding: 1rem;
     text-align: center;
     width: 100%;
   }
   
-  .slider-item h2 {
+  .slid-item h2 {
     color: #032B5F;
     font-size: 18px;
   }
 
-  .slider-item p {
+  .slid-item p {
     color: grey;
     font-size: 13px;
   }
   
-  .slider-button {
+  .slid-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -103,16 +103,16 @@
     z-index: 10;
   }
   
-  .slider-button:hover {
-    background-color: #fff;
-    color: #032B5F;
+  .slid-button:hover {
+    background-color: #305d95;
+    color: #fff;
   }
   
-  .slider-button.prev {
+  .slid-button.prev {
     left: 20px;
   }
   
-  .slider-button.next {
+  .slid-button.next {
     right: 20px;
   }
 
@@ -134,7 +134,7 @@
 }
 
 .tokenButton:hover {
-    background-color: #0056b3;
+    background-color: #305d95;
 }
 
 /* .tokenContainer {
@@ -231,8 +231,7 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.modalButtons {
-    
+.modalButtons {  
     display: flex;
     justify-content: space-between;
     gap: 1rem; 
@@ -243,7 +242,7 @@
     background-color: #032B5F; 
     color: #fff; 
     padding: 12px 24px;
-    font-size: 16px;
+    font-size: 13px;
     border: none; 
     border-radius: 6px; 
     cursor: pointer; 
@@ -301,6 +300,10 @@
 
 .white-stroke {
     border: 2px solid white;
+}
+
+.white-stroke:hover {
+    background-color: #305d95;
 }
 
 .usdc-actions {

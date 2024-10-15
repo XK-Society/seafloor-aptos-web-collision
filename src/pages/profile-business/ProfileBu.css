@@ -1,24 +1,31 @@
 .profile-page {
-  padding: 2rem;
-  max-width: 800px;
+  max-width: 500px;
   margin: auto;
   font-family: "Poppins", sans-serif;
-  background-color: #f5f5f5;
+  /* background-color: #f5f5f5; */
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-h1, h2 {
+.profile-page h1{
   text-align: center;
-  color: #01204E;
+  font-size: 20px;
+  color: white;
   margin-bottom: 1.5rem;
+}
+
+.profile-page h2{
+  text-align: center;
+  color: #032b5f;
+  margin-bottom: 1.5rem;
+  font-size: 18px;
 }
 
 .profile-info {
   background-color: white;
-  padding: 1.5rem;
+  padding: 15px 15px 1px 15px;
   border-radius: 8px;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .profile-item {
@@ -28,44 +35,53 @@ h1, h2 {
 }
 
 .profile-label {
-  font-weight: bold;
+  font-size: 13px;
   width: 200px;
   color: #01204E;
 }
 
 .profile-value {
+  font-size: 13px;
   flex: 1;
   word-break: break-all;
 }
 
 .profit-distribution {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
   background-color: white;
-  padding: 1.5rem;
+  padding: 10px;
   border-radius: 8px;
 }
 
 .profit-distribution input {
-  width: 100%;
-  padding: 0.5rem;
+  font-family: "Poppins", sans-serif;
+  width: 90%;
+  padding: 5px;
   margin-bottom: 1rem;
+  font-size: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
 .profit-distribution button {
-  width: 100%;
+  font-family: "Poppins", sans-serif;
+  width: 35%;
   padding: 0.75rem;
   background-color: #01204E;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 13px;
   transition: background-color 0.3s ease;
 }
 
 .profit-distribution button:hover {
-  background-color: #023e7d;
+  background-color: #305d95;
 }
 
 @media (max-width: 600px) {

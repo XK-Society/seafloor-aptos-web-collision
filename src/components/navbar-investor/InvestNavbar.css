@@ -31,6 +31,11 @@
   padding-bottom: 10px;
 }
 
+.login-options-investor {
+  display: flex;
+  justify-content: space-between;
+}
+
 .wallet-button-investor {
   display: flex;
   align-items: center;
@@ -57,10 +62,6 @@
   text-align: left;
 }
 
-.wallet-investor p:hover {
-  color: #a0aec0;
-}
-
 .wallet-info-investor p {
   font-family: "Poppins", sans-serif;
   font-size: 13px;
@@ -71,18 +72,17 @@
 .button-wallet {
   background-color: #032B5F;
   color: #fff;
-  padding: 5px 12px;
+  padding: 7px 12px;
   border-radius: 3rem;
   cursor: pointer;
   font-size: 12px;
-  font-weight: bold;
+  border: none;
   font-family: "Poppins", sans-serif;
 }
 
 .button-wallet:hover {
-  background-color: #fff;
-  color: #032B5F;
-  border: white;
+  background-color: #305d95;
+  color: white;
 }
 
 /* @media (max-width: 600px) {

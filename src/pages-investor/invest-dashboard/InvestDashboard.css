@@ -1,7 +1,7 @@
 .dash-container {
-    background-color: #032B5F; 
     padding: 20px;
     max-width: 800px; 
+    height: auto;
     margin: 0 auto;
     display: flex; 
     flex-direction: column; 
@@ -18,22 +18,26 @@
 }
 
 .token-list {
-    display: flex;
-    flex-direction: column; 
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 20px; 
     width: 100%;
     align-items: center;
+    overflow-y: auto;
+    padding-bottom: 20px;
 }
 
 .token-card {
-    width: 90%; 
+    /* width: 90%;  */
     background-color: #fff;
     border-radius: 20px;
     padding: 20px;
-    margin-bottom: 15px; 
+    /* margin-bottom: 15px;  */
     display: flex;
     flex-direction: column;
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease;
 }
 
 .token-image {
@@ -74,19 +78,40 @@
     margin-right: 10px;
 }
 
-.copy-button, .divest-button {
-    padding: 5px 10px;
+@media (max-width: 768px) {
+    .token-list {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
+    }
+}
+
+.copy-button {
+    font-family: "Poppins", sans-serif;
+    padding: 5px;
+    width: 60px;
     background-color: #032B5F;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 12px;
     transition: background-color 0.3s ease;
 }
 
+.divest-button {
+    font-family: "Poppins", sans-serif;
+    padding: 10px;
+    width: 100px;
+    background-color: #032B5F;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background-color 0.3s ease;
+}
+
 .copy-button:hover, .divest-button:hover {
-    background-color: #0056b3;
+    background-color: #305d95;
 }
 
 .divest-button {
@@ -118,28 +143,26 @@
     color: #032B5F;
     font-size: 18px;
     text-align: center;
-    margin-bottom: 20px;
 }
 
 .divest-input {
-    width: 100%;
-    padding: 5px;
+    width: 70%;
+    padding: 7px;
     margin: 10px 0 20px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
+    border-radius: 8px;
+    font-size: 14px;
 }
 
 .modal-buttons {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
 }
 
 .confirm-button, .cancel-button {
-    padding: 10px 20px;
+    padding: 5px 10px;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 14px;
     width: 45%;
@@ -161,4 +184,5 @@
 
 .cancel-button:hover {
     background-color: #e0e0e0;
+    color: #032B5F;
 }

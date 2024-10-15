@@ -235,7 +235,9 @@ const Tokenize = () => {
       <div className="token-desc-container">
         {renderStep()}
       </div>
+      
       {showSuccessPopup && (
+        <div className="popup-overlay">
         <div className="success-popup">
           <p>{successMessage}</p>
           <a
@@ -247,6 +249,7 @@ const Tokenize = () => {
           </a>
           <button onClick={() => setShowSuccessPopup(false)}>Close</button>
         </div>
+      </div>
       )}
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Modal from 'react-modal';
 import { FaWallet } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import './InvestNavbar.css';
@@ -8,11 +9,17 @@ import { useKeylessAccounts } from '../core/useKeylessAccounts'; // For Google L
 import useEphemeralKeyPair from '../core/useEphemeralKeyPair'; // Google ephemeral key
 import { GOOGLE_CLIENT_ID } from '../core/constants'; // Replace with your own client ID
 
+Modal.setAppElement('#root');
+
 const InvestNavbar = () => {
   const [account, setAccount] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [walletType, setWalletType] = useState(null);
   const [userName, setUserName] = useState(null);
   const [humanReadableAddress, setHumanReadableAddress] = useState(null);
+
+  const openModal = () => setModalIsOpen(true);
+  const closeModal = () => setModalIsOpen(false);
 
   const { activeAccount, disconnectKeylessAccount } = useKeylessAccounts();
   const navigate = useNavigate();
@@ -95,6 +102,7 @@ const InvestNavbar = () => {
     } else {
       window.open('https://petra.app/', '_blank');
     }
+    closeModal();
   };
 
   const disconnectWallet = async () => {
@@ -139,6 +147,7 @@ const InvestNavbar = () => {
 
   const handleGoogleLogin = () => {
     window.location.href = redirectUrl.toString(); // Redirect to Google OAuth
+    closeModal();
   };
 
   const disconnectGoogleLogin = () => {
@@ -161,16 +170,18 @@ const InvestNavbar = () => {
 
         <div className="wallet-investor">
           {!account ? (
-            <div className="login-options-investor">
-              <button className="wallet-button-investor" onClick={connectPetraWallet}>
-                <FaWallet className="wallet-icon-investor" />
-                <p>Connect<br />Petra Wallet</p>
-              </button>
-              <button className="wallet-button-investor" onClick={handleGoogleLogin}>
-                <FcGoogle className="wallet-icon-investor" />
-                <p>Login with<br />Google</p>
-              </button>
-            </div>
+            <>
+              <div className="login-options-investor">
+                  <button className="wallet-button-investor" onClick={connectPetraWallet}>
+                    <FaWallet className="wallet-icon-investor" />
+                    <p>Connect<br />Petra Wallet</p>
+                  </button>
+                  <button className="wallet-button-investor" onClick={handleGoogleLogin}>
+                    <FcGoogle className="wallet-icon-investor" />
+                    <p>Login with<br />Google</p>
+                  </button>
+                </div>
+              </>
           ) : (
             <div className="wallet-info-investor">
               {walletType === 'google' ? (
@@ -182,7 +193,7 @@ const InvestNavbar = () => {
                 </>
               ) : (
                 <>
-                  <p>{`${formatAddress(humanReadableAddress || '')} (${walletType})`}</p>
+                  <p>{`${formatAddress(account)} (${walletType})`}</p>
                   <button className="button-wallet" onClick={disconnectWallet}>Disconnect</button>
                   <button className="button-wallet" onClick={switchWallet}>Switch Wallet</button>
                 </>

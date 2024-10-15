@@ -13,7 +13,6 @@ const HomeBu = () => {
           <button className="create-token-button">Create Token</button>
         </Link>
       </header>
-
       <div className="list-container">
         <h1 className="list-text">List Of Token</h1>
       </div>
