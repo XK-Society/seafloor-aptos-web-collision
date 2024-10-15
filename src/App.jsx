@@ -19,6 +19,7 @@ import MainPage from './MainPage';
 import './App.css';
 import Tokenize from './pages/home-business/BuToken/CreateToken/UploadImage/Tokenize';
 import gifImage from './assets/fishing-cat.gif';
+import seaBg from './assets/bg.png'
 import CallBackPage from './pages/callback/CallbackPage';
 
 
@@ -34,9 +35,14 @@ function App() {
   const [zkMeWidget, setZkMeWidget] = useState(null);
   const [error, setError] = useState(null);
   
-  useLayoutEffect(() => {
-    document.body.style.backgroundColor = "#032B5F"
-  });
+  useLayoutEffect(() => { 
+    document.body.style.backgroundImage = 'url(${seaBg})';
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundAttachment = "fixed"; 
+  }, []);
+  
 
   useEffect(() => {
     initializeZkMeWidget();
@@ -232,7 +238,7 @@ function App() {
   return (
     <>
       {/* {showNavbar && <InvestNavbar />} */}
-  
+      <div className="app-content">
       <Routes>
         <Route path='/' element={<MainPage openModal={openModal} />} />
         <Route path='/choose' element={<Choose />} />
@@ -277,7 +283,7 @@ function App() {
   </div>
 )}
 
-
+    </div>
     </>
   );  
 }
