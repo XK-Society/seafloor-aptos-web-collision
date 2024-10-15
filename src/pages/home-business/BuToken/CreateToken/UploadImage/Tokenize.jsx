@@ -3,15 +3,19 @@ import { AptosClient } from "aptos";
 import './Tokenize.css';
 
 const Tokenize = () => {
-  const [tokenName, setTokenName] = useState('');
-  const [tokenDescription, setTokenDescription] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+  const [businessName, setBusinessName] = useState('');
+  const [businessDescription, setBusinessDescription] = useState('');
   const [walletAddress, setWalletAddress] = useState(null);
   const [client, setClient] = useState(null);
   const [crabBalance, setCrabBalance] = useState(0);
-  const [investmentAmount, setInvestmentAmount] = useState('');
+  const [initialCrabAmount, setInitialCrabAmount] = useState('');
+  const [isLiquidityPoolInitialized, setIsLiquidityPoolInitialized] = useState(false);
+  const [step, setStep] = useState(0); // 0: Mint, 1: Initialize Pool, 2: Register Business
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [transactionHash, setTransactionHash] = useState('');
 
-  const MODULE_ADDRESS = "0xdb9e0c026f8b61da781e54bbfab64de72d85fff537c0ca872648aa0cac7f3c07";
+  const MODULE_ADDRESS = "0x18b9dccee7eb6726b6688b91a7c9e7e66c6ed3c33755e34f220d97dd1504c6e4";
 
   useEffect(() => {
     const initializeAptos = async () => {
@@ -38,9 +42,15 @@ const Tokenize = () => {
         address,
         `${MODULE_ADDRESS}::crab_token::CrabToken`
       );
-      setCrabBalance(resource.data.balance);
+      if (resource && resource.data && resource.data.balance) {
+        setCrabBalance(resource.data.balance);
+      } else {
+        console.error("Unexpected resource structure:", resource);
+        setCrabBalance(0);
+      }
     } catch (error) {
       console.error("Failed to fetch CRAB balance:", error);
+      setCrabBalance(0);
     }
   };
 
@@ -59,47 +69,163 @@ const Tokenize = () => {
       await client.waitForTransaction(pendingTransaction.hash);
       await fetchCrabBalance(walletAddress, client);
       console.log("CRAB tokens minted successfully");
+      setSuccessMessage("CRAB tokens minted successfully!");
+      setTransactionHash(pendingTransaction.hash);
+      setShowSuccessPopup(true);
+      await checkLiquidityPoolInitialized();
     } catch (error) {
       console.error("Failed to mint CRAB tokens:", error);
     }
   };
 
-  const investInPool = async (amount) => {
+  const checkLiquidityPoolInitialized = async () => {
+    try {
+      await client.getAccountResource(
+        MODULE_ADDRESS,
+        `${MODULE_ADDRESS}::investment_pool::LiquidityPool`
+      );
+      setIsLiquidityPoolInitialized(true);
+      setStep(2); // Move to register business step
+    } catch (error) {
+      if (error.status === 404) {
+        setIsLiquidityPoolInitialized(false);
+        setStep(1); // Move to initialize liquidity pool step
+      } else {
+        console.error("Failed to check liquidity pool status:", error);
+      }
+    }
+  };
+
+  const initializeLiquidityPool = async () => {
     if (!client || !walletAddress) return;
 
-    const LIQUIDITY_POOL_ADDRESS = "0xb1c52baf095e058aa36ec4c6e9bf341a9871e72fc7338946f02df78c3d9bf139";
+    try {
+      const payload = {
+        type: "entry_function_payload",
+        function: `${MODULE_ADDRESS}::investment_pool::initialize`,
+        type_arguments: [],
+        arguments: []
+      };
+
+      const pendingTransaction = await window.aptos.signAndSubmitTransaction(payload);
+      await client.waitForTransaction(pendingTransaction.hash);
+      console.log("Liquidity pool initialized successfully");
+      setIsLiquidityPoolInitialized(true);
+      setStep(2); // Move to register business step
+      setSuccessMessage("Liquidity pool initialized successfully!");
+      setTransactionHash(pendingTransaction.hash);
+      setShowSuccessPopup(true);
+    } catch (error) {
+      console.error("Failed to initialize liquidity pool:", error);
+    }
+  };
+
+  const registerBusiness = async () => {
+    if (!client || !walletAddress) return;
 
     try {
-        const payload = {
-            type: "entry_function_payload",
-            function: `${MODULE_ADDRESS}::crab_token::transfer`,
-            type_arguments: [],
-            arguments: [walletAddress, LIQUIDITY_POOL_ADDRESS, amount.toString()]
-        };
+      const payload = {
+        type: "entry_function_payload",
+        function: `${MODULE_ADDRESS}::investment_pool::register_business`,
+        type_arguments: [],
+        arguments: [walletAddress, initialCrabAmount]
+      };
 
-        const pendingTransaction = await window.aptos.signAndSubmitTransaction(payload);
-        await client.waitForTransaction(pendingTransaction.hash);
-        await fetchCrabBalance(walletAddress, client);
-        console.log("CRAB tokens transferred to liquidity pool successfully");
+      const pendingTransaction = await window.aptos.signAndSubmitTransaction(payload);
+      await client.waitForTransaction(pendingTransaction.hash);
+      console.log("Business registered successfully");
+      setInitialCrabAmount('');
+      setStep(0); // Reset to initial step
+      setSuccessMessage("Business registered successfully!");
+      setTransactionHash(pendingTransaction.hash);
+      setShowSuccessPopup(true);
     } catch (error) {
-        console.error("Failed to transfer CRAB tokens to liquidity pool:", error);
+      console.error("Failed to register business:", error);
     }
-};
+  };
 
-  const handleSubmit = async (e) => {
+  const handleMint = async (e) => {
     e.preventDefault();
-    if (tokenName && tokenDescription) {
-      setSubmitted(true);
-      // Mint some initial CRAB tokens for the business
+    if (businessName && businessDescription) {
       await mintCrabTokens(10000000000000); // Minting 1000 CRAB tokens as an example
     }
   };
 
-  const handleInvestment = async (e) => {
+  const handleRegisterBusiness = async (e) => {
     e.preventDefault();
-    if (investmentAmount) {
-      await investInPool(parseInt(investmentAmount));
-      setInvestmentAmount('');
+    if (initialCrabAmount) {
+      await registerBusiness();
+    }
+  };
+
+  const renderStep = () => {
+    switch (step) {
+      case 0:
+        return (
+          <form className="token-desc" onSubmit={handleMint}>
+            <div className="desc-group">
+              <label htmlFor="businessName">Business Name</label>
+              <input
+                type="text"
+                id="businessName"
+                value={businessName}
+                onChange={(e) => setBusinessName(e.target.value)}
+                placeholder="Enter Business Name"
+                required
+              />
+            </div>
+            <div className="desc-group">
+              <label htmlFor="businessDescription">Business Description</label>
+              <textarea
+                id="businessDescription"
+                value={businessDescription}
+                onChange={(e) => setBusinessDescription(e.target.value)}
+                placeholder="Enter Business Description"
+                required
+              />
+            </div>
+            <button type="submit" className="submit-button">
+              Mint CRAB Tokens
+            </button>
+          </form>
+        );
+      case 1:
+        return (
+          <div className="token-summary">
+            <h2>Initialize Liquidity Pool</h2>
+            <p>The liquidity pool needs to be initialized before you can register your business.</p>
+            <button onClick={initializeLiquidityPool} className="submit-button">
+              Initialize Liquidity Pool
+            </button>
+          </div>
+        );
+      case 2:
+        return (
+          <div className="token-summary">
+            <h2>Register Business</h2>
+            <p><strong>Business Name:</strong> {businessName}</p>
+            <p><strong>Business Description:</strong> {businessDescription}</p>
+            <p><strong>CRAB Balance:</strong> {crabBalance}</p>
+            <form onSubmit={handleRegisterBusiness}>
+              <div className="desc-group">
+                <label htmlFor="initialCrabAmount">Initial CRAB Amount</label>
+                <input
+                  type="number"
+                  id="initialCrabAmount"
+                  value={initialCrabAmount}
+                  onChange={(e) => setInitialCrabAmount(e.target.value)}
+                  placeholder="Enter initial CRAB amount"
+                  required
+                />
+              </div>
+              <button type="submit" className="submit-button">
+                Register Business
+              </button>
+            </form>
+          </div>
+        );
+      default:
+        return null;
     }
   };
 
@@ -107,61 +233,21 @@ const Tokenize = () => {
     <div className="token">
       <h1>Tokenize your business!</h1>
       <div className="token-desc-container">
-        {!submitted ? (
-          <form className="token-desc" onSubmit={handleSubmit}>
-            <div className="desc-group">
-              <label htmlFor="tokenName">Business Name</label>
-              <input
-                type="text"
-                id="tokenName"
-                value={tokenName}
-                onChange={(e) => setTokenName(e.target.value)}
-                placeholder="Enter Business Name"
-                required
-              />
-            </div>
-            <div className="desc-group">
-              <label htmlFor="tokenDescription">Business Description</label>
-              <textarea
-                id="tokenDescription"
-                value={tokenDescription}
-                onChange={(e) => setTokenDescription(e.target.value)}
-                placeholder="Enter Business Description"
-                required
-              />
-            </div>
-            <button type="submit" className="submit-button">
-              Submit and Mint CRAB Tokens
-            </button>
-          </form>
-        ) : (
-          <div className="token-summary">
-            <h2>Token Summary</h2>
-            <p><strong>Token Name:</strong> {tokenName}</p>
-            <p><strong>Token Description:</strong> {tokenDescription}</p>
-            <p><strong>CRAB Balance:</strong> {crabBalance}</p>
-            <form onSubmit={handleInvestment}>
-              <div className="desc-group">
-                <label htmlFor="investmentAmount">Investment Amount</label>
-                <input
-                  type="number"
-                  id="investmentAmount"
-                  value={investmentAmount}
-                  onChange={(e) => setInvestmentAmount(e.target.value)}
-                  placeholder="Enter investment amount"
-                  required
-                />
-              </div>
-              <button type="submit" className="submit-button">
-                Invest in Pool
-              </button>
-            </form>
-            <button className="new-token-button" onClick={() => setSubmitted(false)}>
-              Create Another Token
-            </button>
-          </div>
-        )}
+        {renderStep()}
       </div>
+      {showSuccessPopup && (
+        <div className="success-popup">
+          <p>{successMessage}</p>
+          <a
+            href={`https://explorer.aptoslabs.com/txn/${transactionHash}?network=devnet`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Transaction on Aptos Explorer
+          </a>
+          <button onClick={() => setShowSuccessPopup(false)}>Close</button>
+        </div>
+      )}
     </div>
   );
 };
