@@ -112,7 +112,7 @@ const InTokenList = ({ tokens = defaultTokens }) => {
                 type: "entry_function_payload",
                 function: `${MODULE_ADDRESS}::mock_usdc::mint`,
                 type_arguments: [],
-                arguments: [walletAddress, "1000000000"] // Minting 1000 USDC (assuming 6 decimal places)
+                arguments: [walletAddress, "1000000000"] // Minting 1000 USDC (1000 * 10^6)
             };
             const pendingTransaction = await window.aptos.signAndSubmitTransaction(payload);
             await client.waitForTransaction(pendingTransaction.hash);
@@ -126,11 +126,12 @@ const InTokenList = ({ tokens = defaultTokens }) => {
     const investInPool = async () => {
         if (!client || !walletAddress || !investAmount) return;
         try {
+            const amountInSmallestUnit = Math.floor(parseFloat(investAmount) * 1000000).toString();
             const payload = {
                 type: "entry_function_payload",
                 function: `${MODULE_ADDRESS}::investment_pool::invest`,
                 type_arguments: [],
-                arguments: [tokens[currentIndex].id, investAmount]
+                arguments: [tokens[currentIndex].id, amountInSmallestUnit]
             };
             const pendingTransaction = await window.aptos.signAndSubmitTransaction(payload);
             await client.waitForTransaction(pendingTransaction.hash);
@@ -168,8 +169,8 @@ const InTokenList = ({ tokens = defaultTokens }) => {
                                 <img src={TokenImage} alt={token.name} className="token-image" />
                                 <h2>{token.name}</h2>
                                 <p>{token.desc}</p>
-                                <p>Business Stake: {(businessStakes[token.id] || 0) / 1000000} USDC</p>
-                                <p>Your Stake: {(investorStakes[token.id] || 0) / 1000000} USDC</p>
+                                <p>Business Stake: {((businessStakes[token.id] || 0) / 1000000).toFixed(4)} USDC</p>
+                                <p>Your Stake: {((investorStakes[token.id] || 0) / 1000000).toFixed(4)} USDC</p>
                                 <button className="tokenButton" onClick={() => handleButtonPress(token)}>
                                     Invest
                                 </button>

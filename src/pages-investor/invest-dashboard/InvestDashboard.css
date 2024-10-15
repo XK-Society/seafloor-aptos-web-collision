@@ -1,18 +1,16 @@
 .dash-container {
     background-color: #032B5F; 
     padding: 20px;
-    max-width: 350px; 
+    max-width: 800px; 
     margin: 0 auto;
     display: flex; 
     flex-direction: column; 
     align-items: center; 
-    justify-content: flex-start; 
-    padding: 5px 20px 50px 30px;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 .header {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
     color: #fff;
     text-align: center;
@@ -33,26 +31,21 @@
     padding: 20px;
     margin-bottom: 15px; 
     display: flex;
+    flex-direction: column;
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    transition: box-shadow 0.3s ease; 
-    flex-direction: column;
-}
-
-.token-card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); 
 }
 
 .token-image {
     width: 80px;
     height: 80px;
     border-radius: 20px;
-    margin-right: 20px;
+    margin-bottom: 10px;
 }
 
 .token-info {
-    flex: 1;
     width: 100%;
+    text-align: center;
 }
 
 .token-name {
@@ -62,40 +55,27 @@
     margin-bottom: 5px;
 }
 
-.token-description {
+.token-description, .token-invest {
     font-size: 14px; 
-    color: grey;
-    margin-bottom: 5px;
-}
-
-.token-invest {
-    font-size: 16px; 
-    font-weight: bold;
     color: #333;
     margin-bottom: 5px;
 }
 
 .token-address-container {
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 .token-address {
     font-size: 12px;
     color: #666;
-    background-color: #f0f0f0;
-    padding: 3px 6px;
-    border-radius: 4px;
-    max-width: 70%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    margin-right: 10px;
 }
 
-.copy-button {
-    padding: 3px 8px;
+.copy-button, .divest-button {
+    padding: 5px 10px;
     background-color: #032B5F;
     color: white;
     border: none;
@@ -105,45 +85,80 @@
     transition: background-color 0.3s ease;
 }
 
-.copy-button:hover {
+.copy-button:hover, .divest-button:hover {
     background-color: #0056b3;
 }
 
-.gif-container-dash {
+.divest-button {
+    margin-top: 10px;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
-    justify-content: center; 
-    margin: 20px 0; 
+    justify-content: center;
+    align-items: center;
 }
 
-.gif-container-dash img {
-    max-width: 100%;
-    height: auto; 
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-@media (max-width: 600px) {
-    .header {
-        font-size: 18px;
-    }
+.modal-content h3 {
+    margin-top: 0;
+    color: #032B5F;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-    .token-card {
-        width: 95%;
-        padding: 15px;
-    }
+.divest-input {
+    width: 100%;
+    padding: 5px;
+    margin: 10px 0 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
 
-    .token-name {
-        font-size: 16px;
-    }
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
 
-    .token-description, .token-invest {
-        font-size: 12px;
-    }
+.confirm-button, .cancel-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 45%;
+}
 
-    .token-address {
-        font-size: 10px;
-    }
+.confirm-button {
+    background-color: #032B5F;
+    color: white;
+}
 
-    .copy-button {
-        font-size: 10px;
-        padding: 2px 6px;
-    }
+.cancel-button {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.confirm-button:hover {
+    background-color: #023e7d;
+}
+
+.cancel-button:hover {
+    background-color: #e0e0e0;
 }
