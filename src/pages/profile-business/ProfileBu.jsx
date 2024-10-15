@@ -1,86 +1,85 @@
 import React, { useState, useEffect } from 'react';
-import { getHeaders } from '../../appUtils';
+import { AptosClient } from "aptos";
 import './ProfileBu.css';
+
+const MODULE_ADDRESS = "0x18b9dccee7eb6726b6688b91a7c9e7e66c6ed3c33755e34f220d97dd1504c6e4";
+const NODE_URL = "https://fullnode.devnet.aptoslabs.com";
 
 const ProfileBu = () => {
   const [profileData, setProfileData] = useState({
     walletAddress: '',
     name: '',
-    amount: ''
+    totalStake: ''
   });
 
   useEffect(() => {
-    // Fetch profile data from an API or local storage
-    const fetchData = async () => {
-      try {
-        // First request: Get Wallet by address
-        const walletResponse = await fetch(
-          'https://service-testnet.maschain.com/api/wallet/wallet/0xFB033caae1eb318F1821204150A57fB7671c86Ba',
-          {
-            method: 'GET',
-            headers: getHeaders(),
-          }
-        );
+    const fetchBusinessData = async () => {
+      if ("aptos" in window) {
+        try {
+          const aptosWallet = window.aptos;
+          const response = await aptosWallet.connect();
+          const walletAddress = response.address;
 
-        const walletData = await walletResponse.json();
-        const walletInfo = walletData.result;
-
-        // Update profile data with wallet address and name
-        setProfileData(prevState => ({
-          ...prevState,
-          walletAddress: walletInfo.address,
-          name: walletInfo.name
-        }));
-
-        // Second request: Get Token Balance
-        const balanceResponse = await fetch(
-          'https://service-testnet.maschain.com/api/token/balance',
-          {
-            method: 'POST',
-            headers: getHeaders(),
-            body: JSON.stringify({
-              wallet_address: walletInfo.address,
-              contract_address: '0xF5757012879C259A1c78f6eE6D60f1d13B42f4f5',
-            }),
-          }
-        );
-
-        const balanceData = await balanceResponse.json();
-
-        // Update profile data with the amount
-        setProfileData(prevState => ({
-          ...prevState,
-          amount: `${balanceData.result} SAND`
-        }));
-      } catch (error) {
-        console.error('Error fetching profile data:', error);
+          const client = new AptosClient(NODE_URL);
+          const businessStake = await fetchBusinessStake(client, walletAddress);
+          
+          setProfileData({
+            walletAddress: walletAddress,
+            name: getBusinessName(walletAddress),
+            totalStake: `${businessStake.toFixed(4)} USDC`
+          });
+        } catch (error) {
+          console.error('Error fetching business data:', error);
+        }
+      } else {
+        console.error('Aptos wallet not found');
       }
-    
     };
 
-    fetchData();
+    fetchBusinessData();
   }, []);
+
+  const fetchBusinessStake = async (client, address) => {
+    try {
+      const stake = await client.view({
+        function: `${MODULE_ADDRESS}::investment_pool::business_stake`,
+        type_arguments: [],
+        arguments: [address]
+      });
+      return stake[0] / 1000000; // Convert to USDC
+    } catch (error) {
+      console.error('Error fetching business stake:', error);
+      return 0;
+    }
+  };
+
+  const getBusinessName = (address) => {
+    // This is a placeholder. In a real application, you might want to fetch this from the blockchain or a separate database
+    if (address === MODULE_ADDRESS) {
+      return 'Fishing Business';
+    } else if (address === '0x7e293800352a26008ff6aad253f3b585c711b0d429e592c4daff3dcc827c1f62') {
+      return 'Agriculture Business';
+    } else {
+      return 'Unknown Business';
+    }
+  };
 
   return (
     <div className="profile-page">
-      <h1>Profile</h1>
+      <h1>Business Profile</h1>
       <div className="profile-info">
         <div className="profile-item">
           <span className="profile-label">Wallet Address:</span>
           <span className="profile-value">{profileData.walletAddress}</span>
         </div>
         <div className="profile-item">
-          <span className="profile-label">Name:</span>
+          <span className="profile-label">Business Name:</span>
           <span className="profile-value">{profileData.name}</span>
         </div>
         <div className="profile-item">
-          <span className="profile-label">Amount:</span>
-          <span className="profile-value">{profileData.amount}</span>
+          <span className="profile-label">Total Stake:</span>
+          <span className="profile-value">{profileData.totalStake}</span>
         </div>
-        {/* <div className="profile-item">
-          <span className="profile-label">Contract Address:</span>
-          <span className="profile-value">{profileData.contractAddress}</span>
-        </div> */}
       </div>
     </div>
   );
