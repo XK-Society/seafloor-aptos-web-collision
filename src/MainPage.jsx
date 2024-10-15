@@ -4,8 +4,8 @@ import seafloorLogo from './assets/3d-logo.png';
 
 function MainPage({ openModal }) {
   return (
-    <>
-      <div className='container'>
+    <div className='container'>
+      <div className='container-body'>
         <div className='border-home'>
           <div className='logo-home'>
             <img src={seafloorLogo} className="logo" alt="Seafloor Finance logo" />
@@ -24,7 +24,7 @@ function MainPage({ openModal }) {
           <p>Raising funds is just one click away.</p>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

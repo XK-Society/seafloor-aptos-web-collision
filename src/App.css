@@ -1,8 +1,16 @@
 .container {
+    background-image: url('./assets/ocean.gif'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+}
+
+.container-body {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* height: 80vh; */
+    height: 563px;
     padding-top: 80px;
     font-family: "Poppins", sans-serif;
 }
@@ -39,7 +47,6 @@
     font-size: 24px;
     margin-bottom: 20px;
 }
-
 
 .button {
     font-family: "Poppins", sans-serif;
