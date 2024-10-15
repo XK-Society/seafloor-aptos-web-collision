@@ -16,35 +16,34 @@ import Investor from './pages-investor/HomeInvestor';
 import InvestDashboard from './pages-investor/invest-dashboard/InvestDashboard';
 import InvestProfile from './pages-investor/invest-profile/InvestProfile';
 import MainPage from './MainPage';
-import './App.css';
 import Tokenize from './pages/home-business/BuToken/CreateToken/UploadImage/Tokenize';
 import gifImage from './assets/fishing-cat.gif';
-import seaBg from './assets/bg.png'
 import CallBackPage from './pages/callback/CallbackPage';
+import seaBg from './assets/bg.png'
 
-
-const API_KEY = '';
-const APP_ID = '';
-const PROGRAM_NO = '';
+// Updated to use Vite environment variable syntax
+const API_KEY = import.meta.env.VITE_REACT_APP_API_KEY;
+const APP_ID = import.meta.env.VITE_REACT_APP_APP_ID;
+const PROGRAM_NO = import.meta.env.VITE_REACT_APP_PROGRAM_NO;
 
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [showModal, setShowModal] = useState(false); // Manage modal visibility
-  const [userType, setUserType] = useState(''); // Track if Business or Investor
+  const [showModal, setShowModal] = useState(false);
+  const [userType, setUserType] = useState('');
   const [zkMeWidget, setZkMeWidget] = useState(null);
   const [error, setError] = useState(null);
   
   useLayoutEffect(() => { 
-    document.body.style.backgroundImage = 'url(${seaBg})';
+    document.body.style.backgroundImage = `url(${seaBg})`;
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundPosition = "center";
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundAttachment = "fixed"; 
   }, []);
   
-
   useEffect(() => {
+    console.log('Environment variables:', { API_KEY, APP_ID, PROGRAM_NO });
     initializeZkMeWidget();
   }, []);
 
@@ -80,8 +79,7 @@ function App() {
   };
 
   const initializeZkMeWidget = () => {
-    // Clear any potentially persisted tokens
-    localStorage.removeItem('zkme_token'); // Adjust this key if needed
+    localStorage.removeItem('zkme_token');
 
     const provider = {
       async getAccessToken() {
@@ -149,7 +147,6 @@ function App() {
     const { isGrant, associatedAccount } = results;
     if (isGrant) {
       console.log('KYC completed for account:', associatedAccount);
-      // TODO: Update your backend or local state to mark the user as KYC verified
       navigate(userType === 'business' ? '/business-user' : '/invest-dashboard');
     } else {
       console.log('KYC process failed or was not completed');
@@ -157,18 +154,16 @@ function App() {
     }
   };
 
-  // const showNavbar = !location.pathname.startsWith('/invest') && !location.pathname.startsWith('/business');
-
   const openModal = (type) => {
     setUserType(type);
     setShowModal(true);
-    setError(null); // Clear any previous errors
+    setError(null);
   };
 
   const closeModal = () => {
     setShowModal(false);
     setUserType('');
-    setError(null); // Clear any errors when closing the modal
+    setError(null);
   };
 
   const handleExistingUser = () => {
@@ -182,7 +177,7 @@ function App() {
 
   const handleNewUser = async () => {
     if (!APP_ID || !PROGRAM_NO) {
-      console.error('APP_ID or PROGRAM_NO is not defined');
+      console.error('APP_ID or PROGRAM_NO is not defined', { APP_ID, PROGRAM_NO });
       setError('Application configuration error. Please contact support.');
       return;
     }
@@ -207,7 +202,6 @@ function App() {
         const userAccount = response.address;
         console.log('User account:', userAccount);
         
-        // Check if the user has already completed KYC
         console.log('Verifying KYC status...');
         const { isGrant } = await verifyKycWithZkMeServices(
           APP_ID, 
@@ -237,53 +231,47 @@ function App() {
 
   return (
     <>
-      {/* {showNavbar && <InvestNavbar />} */}
       <div className="app-content">
-      <Routes>
-        <Route path='/' element={<MainPage openModal={openModal} />} />
-        <Route path='/choose' element={<Choose />} />
-        <Route path='/collab' element={<Collab />} />
-        <Route path='/callback' element={<CallBackPage />} />
-  
-        {/* Business */}
-        <Route path='/homebu' element={<HomeBu />} />
-        <Route path='/dashboardbu' element={<DashboardBu />} />
-        <Route path='/profilebu' element={<ProfileBu />} />
-        <Route path='/profilecreate' element={<ProfileCreate />} />
-        <Route path='/thankbu' element={<ThankBusiness />} />
-        <Route path="/business-user/*" element={<BusinessUser />} />
-        <Route path="/tokenize" element={<Tokenize />} />
-  
-        {/* Investor */}
-        <Route path="/investor" element={<Investor />} />
-        <Route path="/invest-dashboard" element={<InvestDashboard />} />
-        <Route path="/invest-home" element={<Investor />} />
-        <Route path="/invest-profile" element={<InvestProfile />} />
-      </Routes>
-  
-{/* Modal Popup */}
-{showModal && (
-  <div className="modal-overlay">
-    <div className="modal-content border-home">
-      {/* Close Button */}
-      <button className="close-button" onClick={closeModal}>&times;</button>
-
-      {/* Displaying the GIF */}
-      <div className="gif-container">
-        <img src={gifImage} alt="Description of the GIF" />
+        <Routes>
+          <Route path='/' element={<MainPage openModal={openModal} />} />
+          <Route path='/choose' element={<Choose />} />
+          <Route path='/collab' element={<Collab />} />
+          <Route path='/callback' element={<CallBackPage />} />
+    
+          {/* Business */}
+          <Route path='/homebu' element={<HomeBu />} />
+          <Route path='/dashboardbu' element={<DashboardBu />} />
+          <Route path='/profilebu' element={<ProfileBu />} />
+          <Route path='/profilecreate' element={<ProfileCreate />} />
+          <Route path='/thankbu' element={<ThankBusiness />} />
+          <Route path="/business-user/*" element={<BusinessUser />} />
+          <Route path="/tokenize" element={<Tokenize />} />
+    
+          {/* Investor */}
+          <Route path="/investor" element={<Investor />} />
+          <Route path="/invest-dashboard" element={<InvestDashboard />} />
+          <Route path="/invest-home" element={<Investor />} />
+          <Route path="/invest-profile" element={<InvestProfile />} />
+        </Routes>
+    
+        {showModal && (
+          <div className="modal-overlay">
+            <div className="modal-content border-home">
+              <button className="close-button" onClick={closeModal}>&times;</button>
+              <div className="gif-container">
+                <img src={gifImage} alt="Description of the GIF" />
+              </div>
+              <h2 className="heading-role">Welcome, {userType === 'business' ? 'Business User' : 'Investor'}!</h2>
+              <p className="modal-paragraph">Are you an existing user or a new user?</p>
+              <div className="modal-buttons">
+                <button onClick={handleExistingUser}>Existing User</button>
+                <button onClick={handleNewUser}>New User</button>
+              </div>
+              {error && <p className="error-message">{error}</p>}
+            </div>
+          </div>
+        )}
       </div>
-      <h2 className="heading-role">Welcome, {userType === 'business' ? 'Business User' : 'Investor'}!</h2>
-      <p className="modal-paragraph">Are you an existing user or a new user?</p>
-      <div className="modal-buttons">
-        <button onClick={handleExistingUser}>Existing User</button>
-        <button onClick={handleNewUser}>New User</button>
-      </div>
-      {error && <p className="error-message">{error}</p>}
-    </div>
-  </div>
-)}
-
-    </div>
     </>
   );  
 }

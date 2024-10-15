@@ -11,5 +11,10 @@ export const testnetClient = new Aptos(
   new AptosConfig({ network: Network.TESTNET })
 );
 
-/// FIXME: Put your client id here
-export const GOOGLE_CLIENT_ID = "698372493668-vaeh7u9jdgnjsvu1o67sp7lqld2e819t.apps.googleusercontent.com";
+// Now TypeScript should recognize this without errors
+export const GOOGLE_CLIENT_ID = import.meta.env.VITE_REACT_APP_GOOGLE_CLIENT_ID;
+
+// It's a good practice to throw an error if the Client ID is missing
+if (!GOOGLE_CLIENT_ID) {
+  throw new Error("VITE_REACT_APP_GOOGLE_CLIENT_ID is not defined in environment variables");
+}
