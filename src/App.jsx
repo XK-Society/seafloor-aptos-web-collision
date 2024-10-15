@@ -19,6 +19,7 @@ import MainPage from './MainPage';
 import './App.css';
 import Tokenize from './pages/home-business/BuToken/CreateToken/UploadImage/Tokenize';
 import gifImage from './assets/fishing-cat.gif';
+import CallBackPage from './pages/callback/CallbackPage';
 
 
 const API_KEY = '';
@@ -236,6 +237,7 @@ function App() {
         <Route path='/' element={<MainPage openModal={openModal} />} />
         <Route path='/choose' element={<Choose />} />
         <Route path='/collab' element={<Collab />} />
+        <Route path='/callback' element={<CallBackPage />} />
   
         {/* Business */}
         <Route path='/homebu' element={<HomeBu />} />
