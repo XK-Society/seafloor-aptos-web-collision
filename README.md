@@ -44,6 +44,7 @@ npm run dev
 4. https://github.com/aleyamaliki
 
 
-![image](https://github.com/user-attachments/assets/bbdc5661-f6c4-4186-962c-c7948b18830b)
+![image](https://github.com/user-attachments/assets/d202b90b-3409-4d31-b751-03b1ae005912)
+
 
 
