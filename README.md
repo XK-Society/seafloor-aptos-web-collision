@@ -1,4 +1,4 @@
-**Seafloor Finance Front End- Aptos Code Collision Hackathon
+**Seafloor Finance Front End- Aptos Code Collision Hackathon**
 
 **Overview**
 Seafloor Finance is a decentralized finance (DeFi) platform focused on enabling users to engage in various financial activities on the Aptos blockchain. This repository contains the frontend code, built using React and Vite.
